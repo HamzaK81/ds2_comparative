@@ -286,7 +286,3 @@ void preOrder(Node *root)
 		preOrder(root->right); 
 	} 
 } 
-
- 
-
-
