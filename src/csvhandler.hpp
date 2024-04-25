@@ -26,5 +26,6 @@ public:
 
     void loadData(const string &csv_file);
     void printData();
+    void writeDataToFile(const std::vector<double> &x, const std::vector<double> &y, const std::string &filename);
 
 };

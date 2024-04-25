@@ -1,4 +1,6 @@
 #include <iostream>
+#include <chrono>
+#include <cstdlib>
 #include "csvhandler.cpp"
 #include "bst.cpp"
 #include "redblack.cpp"
@@ -12,9 +14,9 @@ using namespace std;
 void someStuff() {
 
     CSVHandler* handler = new CSVHandler;
-    // handler->loadData("./data/small.csv");
+    handler->loadData("./data/small.csv");
     // handler->loadData("./data/medium.csv");
-    handler->loadData("./data/large.csv");
+    // handler->loadData("./data/large.csv");
 
     // handler->printData();
     
@@ -22,9 +24,14 @@ void someStuff() {
 
     bst->populate(handler->entries);
 
-    bst->search(111573);
-    bst->remove(bst->root, 111573);
-    bst->search(111573);
+}
+
+
+void someMoreStuff(BSTIndex* bst) {
+
+    bst->search(115976);
+    // bst->remove(bst->root, 115976);
+    // bst->search(115976);
 
 
     // bst->inOrder(bst->root);
@@ -122,43 +129,43 @@ void redblackstuff() {
 }
 
 
-void treapstuff() {
+// void treapstuff() {
 
-    srand(time(NULL));
+//     srand(time(NULL));
 
-	struct TreapNode *root = NULL;
-	root = insert(root, 50);
-	root = insert(root, 30);
-	root = insert(root, 20);
-	root = insert(root, 40);
-	root = insert(root, 70);
-	root = insert(root, 60);
-	root = insert(root, 80);
+// 	struct TreapNode *root = NULL;
+// 	root = insert(root, 50);
+// 	root = insert(root, 30);
+// 	root = insert(root, 20);
+// 	root = insert(root, 40);
+// 	root = insert(root, 70);
+// 	root = insert(root, 60);
+// 	root = insert(root, 80);
 
-	cout << "Inorder traversal of the given tree \n";
-	inorder(root);
+// 	cout << "Inorder traversal of the given tree \n";
+// 	inorder(root);
 
-	cout << "\nDelete 20\n";
-	root = deleteNode(root, 20);
-	cout << "Inorder traversal of the modified tree \n";
-	inorder(root);
+// 	cout << "\nDelete 20\n";
+// 	root = deleteNode(root, 20);
+// 	cout << "Inorder traversal of the modified tree \n";
+// 	inorder(root);
 
-	cout << "\nDelete 30\n";
-	root = deleteNode(root, 30);
-	cout << "Inorder traversal of the modified tree \n";
-	inorder(root);
+// 	cout << "\nDelete 30\n";
+// 	root = deleteNode(root, 30);
+// 	cout << "Inorder traversal of the modified tree \n";
+// 	inorder(root);
 
-	cout << "\nDelete 50\n";
-	root = deleteNode(root, 50);
-	cout << "Inorder traversal of the modified tree \n";
-	inorder(root);
+// 	cout << "\nDelete 50\n";
+// 	root = deleteNode(root, 50);
+// 	cout << "Inorder traversal of the modified tree \n";
+// 	inorder(root);
 
-	TreapNode *res = search(root, 50);
-	(res == NULL)? cout << "\n50 Not Found ":
-				cout << "\n50 found";
+// 	TreapNode *res = search(root, 50);
+// 	(res == NULL)? cout << "\n50 Not Found ":
+// 				cout << "\n50 found";
 
 
-}
+// }
 
 
 int main() {
@@ -171,10 +178,25 @@ int main() {
 
     // avlDeleteStuff();
 
-    treapstuff();
+    // treapstuff();
 
 
+    auto start = chrono::steady_clock::now();
 
+    someStuff();
+
+    auto end = chrono::steady_clock::now(); 
+
+    chrono::duration<double> duration = end - start;
+    double runtime = duration.count();
+
+    std::vector<double> x = {1, 2, 3, 4, 5};
+    std::vector<double> y = {2, 4, 6, 8, 10};
+
+    // Write data to file
+    writeDataToFile(x, y, "src/graph/graphdata.csv");
+
+    system("python src/graph/pyscript.py");
 
     return 0;
 

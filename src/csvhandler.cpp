@@ -47,3 +47,27 @@ void CSVHandler::printData() {
     }
 
 }
+
+
+void writeDataToFile(const std::vector<double> &x, const std::vector<double> &y, const std::string &filename) {
+
+    ofstream file(filename);
+    
+    if (file.is_open()) {
+    
+        for (size_t i = 0; i < x.size(); ++i) {
+    
+            file << x[i] << "," << y[i] << "\n";
+    
+        }
+    
+        file.close();
+        std::cout << "Data written to file: " << filename << endl;
+    
+    } else {
+    
+        cerr << "Unable to open file: " << filename << endl;
+    
+    }
+
+}
