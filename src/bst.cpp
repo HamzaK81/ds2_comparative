@@ -121,6 +121,7 @@ void BSTIndex::search(int search) {
 
                 found = true;
                 cout << "The node: " << currentptr->data << " was found." << endl;
+                return;
  
             }
         }
