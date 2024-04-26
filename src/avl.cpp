@@ -34,7 +34,7 @@ int max(int a, int b) {
 
 
 // Allocate new node
-AVLNode* newNode(int key) {
+AVLNode* newAVLNode(int key) {
 
 	AVLNode* node = new AVLNode(); 
 	node->key = key; 
@@ -106,24 +106,24 @@ int getBalance(AVLNode *node) {
 
 
 // Recursive function to insert a key in subtree of passed node
-AVLNode* insert(AVLNode* node, int key) 
+AVLNode* AVLInsert(AVLNode* node, int key) 
 { 
 
 	// Perform the normal BST insertion
 	if (node == nullptr) {
 
-        return(newNode(key)); 
+        return(newAVLNode(key)); 
 
     }
 		
 
 	if (key < node->key) {
 
-        node->left = insert(node->left, key);
+        node->left = AVLInsert(node->left, key);
 
     } else if (key > node->key) {
 
-        node->right = insert(node->right, key); 
+        node->right = AVLInsert(node->right, key); 
 
     } else {
         
@@ -200,7 +200,7 @@ AVLNode * minValueNode(AVLNode* node) {
 } 
  
 // Recursive function to delete a node with value "key", from tree rooted at "root". Returns new root
-AVLNode* deleteNode(AVLNode* root, int key) { 
+AVLNode* AVLDelete(AVLNode* root, int key) { 
      
     if (root == NULL) {
 
@@ -210,11 +210,11 @@ AVLNode* deleteNode(AVLNode* root, int key) {
         
     if ( key < root->key ) {
 
-        root->left = deleteNode(root->left, key); 
+        root->left = AVLDelete(root->left, key); 
 
     } else if( key > root->key ) {
 
-        root->right = deleteNode(root->right, key); 
+        root->right = AVLDelete(root->right, key); 
 
     } else { 
 
@@ -246,7 +246,7 @@ AVLNode* deleteNode(AVLNode* root, int key) {
             root->key = successor->key; 
  
             // Delete successor 
-            root->right = deleteNode(root->right, successor->key); 
+            root->right = AVLDelete(root->right, successor->key); 
         } 
     } 
  
@@ -322,7 +322,7 @@ AVLNode* AVLpopulate(AVLNode* root, vector<int> entries) {
 
     for (auto entry : entries) {
 
-        root = insert(root, entry);
+        root = AVLInsert(root, entry);
 
     }
 
@@ -330,7 +330,39 @@ AVLNode* AVLpopulate(AVLNode* root, vector<int> entries) {
     
 }
 
-void AVLSearch() {
+void AVLSearch(AVLNode* root, int key) {
 
-    
+    if (root->key == key) {
+
+        cout << "Node with value: " << root->key << " was found in the AVL Tree." << endl;
+        return;
+
+    } else if (key < root->key) {
+
+        if (root->left == nullptr) {
+
+            cout << "Node does not exist in the AVL Tree." << endl;
+            return;
+
+        } else {
+
+            AVLSearch(root->left, key);
+            return;
+
+        }
+
+    } else if (key > root->key) {
+
+        if (root->right == nullptr) {
+
+            cout << "Node does not exist in the AVL Tree." << endl;
+            return;
+
+        } else {
+
+            AVLSearch(root->right, key);
+            return;
+
+        }
+    }    
 }

@@ -6,19 +6,6 @@
 using namespace std;
 
 
-// struct DataEntry 
-// {
-
-// public:
-//     string filename;
-//     string type;
-//     int size;
-//     string accessedOn;
-//     string modifiedOn;
-//     string path;
-// };
-
-
 class CSVHandler {
 
 public:
