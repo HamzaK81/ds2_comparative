@@ -6,7 +6,7 @@
 #include "redblack.cpp"
 #include "avl.cpp"
 #include "treap.cpp"
-
+#include "generate.cpp"
 
 using namespace std;
 
@@ -41,7 +41,7 @@ void someMoreStuff(BSTIndex* bst) {
 
 void avlInsertStuff() 
 { 
-	Node *root = NULL; 
+	AVLNode *root = NULL; 
 	
 	/* Constructing tree given in 
 	the above figure */
@@ -61,14 +61,14 @@ void avlInsertStuff()
 	*/
 	cout << "Preorder traversal of the "
 			"constructed AVL tree is \n"; 
-	preOrder(root); 
+	AVLinOrder(root); 
 	
 }
 
 
 void avlDeleteStuff() {
 
-    Node *root = NULL; 
+    AVLNode *root = nullptr; 
  
     /* Constructing tree given in
     the above figure */
@@ -94,7 +94,7 @@ void avlDeleteStuff() {
  
     cout << "Preorder traversal of the "
             "constructed AVL tree is \n"; 
-    preOrder(root); 
+    AVLinOrder(root); 
  
     root = deleteNode(root, 10); 
  
@@ -110,7 +110,7 @@ void avlDeleteStuff() {
  
     cout << "\nPreorder traversal after"
          << " deletion of 10 \n"; 
-    preOrder(root); 
+    AVLinOrder(root); 
 
 }
 
@@ -181,22 +181,55 @@ int main() {
     // treapstuff();
 
 
-    auto start = chrono::steady_clock::now();
+    // auto start = chrono::steady_clock::now();
 
-    someStuff();
+    // someStuff();
 
-    auto end = chrono::steady_clock::now(); 
+    // auto end = chrono::steady_clock::now(); 
 
-    chrono::duration<double> duration = end - start;
-    double runtime = duration.count();
+    // chrono::duration<double> duration = end - start;
+    // double runtime = duration.count();
 
-    std::vector<double> x = {1, 2, 3, 4, 5};
-    std::vector<double> y = {2, 4, 6, 8, 10};
+    // std::vector<double> x = {1, 2, 3, 4, 5};
+    // std::vector<double> y = {2, 4, 6, 8, 10};
 
-    // Write data to file
-    writeDataToFile(x, y, "src/graph/graphdata.csv");
+    // // Write data to file
+    // writeDataToFile(x, y, "src/graph/graphdata.csv");
 
-    system("python src/graph/pyscript.py");
+    // system("python src/graph/pyscript.py");
+
+    // generate("data/smallsample.csv", 1000, 100);
+    // generate("data/mediumsample.csv", 5000, 1000);
+    // generate("data/largesample.csv", 20000, 10000);
+
+    CSVHandler* handler = new CSVHandler;
+    // handler->loadData("./data/smallsample.csv");
+    // handler->loadData("./data/mediumsample.csv");
+    handler->loadData("./data/largesample.csv");
+
+    // handler->printData();
+    
+    // BSTIndex* bst = new BSTIndex;
+
+    // bst->populate(handler->entries);
+
+    // bst->search(408);
+    // bst->remove(bst->root, 408);
+    // bst->search(408);
+
+
+    // bst->inOrder(bst->root);
+
+    // handler->printData();
+
+    AVLNode* avl_root = nullptr;
+
+    avl_root = AVLpopulate(avl_root, handler->entries);
+
+    AVLinOrder(avl_root);
+
+    
+
 
     return 0;
 

@@ -25,13 +25,8 @@ void CSVHandler::loadData(const string &csv_file) {
     while (getline(file, line)) {
 
         stringstream ss(line);
-        DataEntry entry;
-        getline(ss, entry.filename, ',');
-        getline(ss, entry.type, ',');
-        ss >> entry.size;
-        getline(ss, entry.accessedOn, ',');
-        getline(ss, entry.modifiedOn, ',');
-        getline(ss, entry.path, ',');
+        int entry;
+        ss >> entry;
 
         entries.push_back(entry);
     }
@@ -43,13 +38,13 @@ void CSVHandler::loadData(const string &csv_file) {
 void CSVHandler::printData() {
 
     for (auto &entry : entries) {
-        cout << entry.filename << " " << entry.type << " " << entry.size << " " << entry.accessedOn << " " << entry.modifiedOn << " " << entry.path <<  endl;
+        cout << entry << endl;
     }
 
 }
 
 
-void writeDataToFile(const std::vector<double> &x, const std::vector<double> &y, const std::string &filename) {
+void CSVHandler::writeDataToFile(const std::vector<double> &x, const std::vector<double> &y, const std::string &filename) {
 
     ofstream file(filename);
     
@@ -71,3 +66,5 @@ void writeDataToFile(const std::vector<double> &x, const std::vector<double> &y,
     }
 
 }
+
+

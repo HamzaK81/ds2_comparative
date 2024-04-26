@@ -12,7 +12,7 @@ BSTIndex::BSTIndex() {
 }
 
 
-void BSTIndex::insert(DataEntry &data) {
+void BSTIndex::insert(int &data) {
 
     bool found = false;
 
@@ -30,7 +30,7 @@ void BSTIndex::insert(DataEntry &data) {
 
         while (!found) {
 
-            if (data.size <= currentptr->data.size) { // search left subtree
+            if (data <= currentptr->data) { // search left subtree
 
                 if (currentptr->left == nullptr) {
 
@@ -68,13 +68,13 @@ void BSTIndex::inOrder(BSTNode* node) {
     }
 
     inOrder(node->left);
-    cout << node->data.size << endl;
+    cout << node->data << endl;
     inOrder(node->right);
 
 }
 
 
-void BSTIndex::search(int searchSize) {
+void BSTIndex::search(int search) {
 
     bool found = false;
     this->currentptr = root;
@@ -87,9 +87,9 @@ void BSTIndex::search(int searchSize) {
 
         while (!found) {
 
-            if (searchSize < currentptr->data.size) { // search left subtree
+            if (search < currentptr->data) { // search left subtree
 
-                // cout << "LEFT TURN AT: " << currentptr->data.size << endl;
+                // cout << "LEFT TURN AT: " << currentptr->data << endl;
 
                 if (currentptr->left == nullptr) {
 
@@ -102,9 +102,9 @@ void BSTIndex::search(int searchSize) {
 
                 }
 
-            } else if (searchSize > currentptr->data.size) {  // search right subtree
+            } else if (search > currentptr->data) {  // search right subtree
 
-                // cout << "RIGHT TURN AT: " << currentptr->data.size << endl;
+                // cout << "RIGHT TURN AT: " << currentptr->data << endl;
 
                 if (currentptr->right == nullptr) {
 
@@ -120,10 +120,7 @@ void BSTIndex::search(int searchSize) {
             } else {
 
                 found = true;
-                cout << "The details of the searched item are:" << endl;
-                cout << "Filename: " << currentptr->data.filename << endl;
-                cout << "Type: " << currentptr->data.type << endl;
-                cout << "Size: " << currentptr->data.size << endl;
+                cout << "The node: " << currentptr->data << " was found." << endl;
  
             }
         }
@@ -134,7 +131,7 @@ void BSTIndex::search(int searchSize) {
 }
 
 
-void BSTIndex::populate(vector<DataEntry> &entries) {
+void BSTIndex::populate(vector<int> &entries) {
 
     for (auto &entry : entries) {
 
@@ -146,7 +143,7 @@ void BSTIndex::populate(vector<DataEntry> &entries) {
 }
 
 
-BSTNode* BSTIndex::remove(BSTNode* node, int deleteSize) {
+BSTNode* BSTIndex::remove(BSTNode* node, int del) {
 
     // base case
     if (node == nullptr) {
@@ -154,14 +151,14 @@ BSTNode* BSTIndex::remove(BSTNode* node, int deleteSize) {
     }
 
 
-    if (deleteSize < node->data.size) {  // left subtree
+    if (del < node->data) {  // left subtree
 
-        node->left = remove(node->left, deleteSize);
+        node->left = remove(node->left, del);
         return node;
 
-    } else if (deleteSize > node->data.size) {  // right subtree
+    } else if (del > node->data) {  // right subtree
 
-        node->right = remove(node->right, deleteSize);
+        node->right = remove(node->right, del);
         return node;
 
     }

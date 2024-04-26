@@ -6,23 +6,23 @@
 using namespace std;
 
 
-struct DataEntry 
-{
+// struct DataEntry 
+// {
 
-public:
-    string filename;
-    string type;
-    int size;
-    string accessedOn;
-    string modifiedOn;
-    string path;
-};
+// public:
+//     string filename;
+//     string type;
+//     int size;
+//     string accessedOn;
+//     string modifiedOn;
+//     string path;
+// };
 
 
 class CSVHandler {
 
 public:
-    vector<DataEntry> entries;
+    vector<int> entries;
 
     void loadData(const string &csv_file);
     void printData();

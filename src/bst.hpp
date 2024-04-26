@@ -12,7 +12,7 @@ public:
 
     BSTNode* left = nullptr;
     BSTNode* right = nullptr;
-    DataEntry data;
+    int data;
 
 };
 
@@ -27,8 +27,8 @@ public:
 
     BSTIndex();
 
-    void populate(vector<DataEntry> &entries);
-    void insert(DataEntry &data);
+    void populate(vector<int> &entries);
+    void insert(int &data);
     BSTNode* predecessor(BSTNode* node);
     BSTNode* remove(BSTNode* node, int deleteSize);
     void search(int searchSize);
